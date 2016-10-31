@@ -1,0 +1,6 @@
+Workout of the Day
+"Tabata This!"
+Tabata Row Rest 1 minute Tabata Squat Rest 1 minute Tabata Pull-up Rest 1 minute Tabata Push-up Rest 1 minute Tabata Sit-up
+The Tabata interval is 20 seconds of work followed by 10 seconds of rest for 8 intervals.
+Tabata score is the least number of reps performed in any of the eight intervals. Unit for the row is "calories".
+Post Tabata score for each exercise to comments and total for final score.
