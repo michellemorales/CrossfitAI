@@ -3,7 +3,7 @@
 #http://machinelearningmastery.com/text-generation-lstm-recurrent-neural-networks-python-keras/
 #Train LSTM using CFGC wod data
 
-import sys, os, os.path
+import sys, os, os.path, nltk
 import numpy
 from keras.models import Sequential
 from keras.layers import Dense
