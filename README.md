@@ -1,5 +1,5 @@
 # Crossfit AI
-This is a repository which contains the code from my blog post on building a Crossfit AI coach using LSTM neural networks. 
+This repository contains code from my blog post on building a Crossfit AI coach using LSTM neural networks. [link]
 
 This repo also includes the data used to train the LSTM, a scraper script, and scripts to train and generate the (not so great) workouts. 
 
