@@ -4,6 +4,7 @@
 # Load LSTM network and generate text
 import sys, os, os.path
 import numpy
+from nltk import word_tokenize
 from keras.models import Sequential
 from keras.layers import Dense
 from keras.layers import Dropout
@@ -24,14 +25,14 @@ for filename in os.listdir(directory):
 
 # create mapping of unique chars to integers, and a reverse mapping
 words = sorted(list(set(cfgc_data)))
-word_to_int = dict((w, i) for i, w in enumerate(words))
-int_to_word = dict((i, w) for i, w in enumerate(words))
+words_to_int = dict((w, i) for i, w in enumerate(words))
+int_to_words = dict((i, w) for i, w in enumerate(words))
 
 # summarize the loaded data
 n_words = len(cfgc_data)
 n_vocab = len(words)
-print "Total Words: ", n_words
-print "Total Vocab: ", n_vocab
+
+
 # prepare the dataset of input to output pairs encoded as integers
 seq_length = 10
 dataX = []
@@ -42,7 +43,7 @@ for i in range(0, n_words - seq_length, 1):
 	dataX.append([words_to_int[w] for w in seq_in])
 	dataY.append(words_to_int[seq_out])
 n_patterns = len(dataX)
-print "Total Patterns: ", n_patterns
+print "Coach is being trained..."
 # reshape X to be [samples, time steps, features]
 X = numpy.reshape(dataX, (n_patterns, seq_length, 1))
 # normalize
@@ -55,23 +56,23 @@ model.add(LSTM(256, input_shape=(X.shape[1], X.shape[2])))
 model.add(Dropout(0.2))
 model.add(Dense(y.shape[1], activation='softmax'))
 # load the network weights
-filename = "logW/"
+filename = "logW/weights-improvement-19-3.7380.hdf5"
 model.load_weights(filename)
 model.compile(loss='categorical_crossentropy', optimizer='adam')
 # pick a random seed
 start = numpy.random.randint(0, len(dataX)-1)
 pattern = dataX[start]
 print "Seed:"
-print "\"", ''.join([int_to_char[value] for value in pattern]), "\""
+print "\"", ' '.join([int_to_words[value] for value in pattern]), "\""
 # generate wod
-for i in range(100):
+for i in range(20):
 	x = numpy.reshape(pattern, (1, len(pattern), 1))
 	x = x / float(n_vocab)
 	prediction = model.predict(x, verbose=0)
 	index = numpy.argmax(prediction)
-	result = int_to_char[index]
-	seq_in = [int_to_char[value] for value in pattern]
-	sys.stdout.write(result)
+	result = int_to_words[index]
+	seq_in = [int_to_words[value] for value in pattern]
+	sys.stdout.write(result+' ')
 	pattern.append(index)
 	pattern = pattern[1:len(pattern)]
 print "\nLet's go!"

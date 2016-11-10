@@ -39,9 +39,9 @@ print "Total Vocab: ", n_vocab
 seq_length = 10
 dataX = []
 dataY = []
-for i in range(0, n_chars - seq_length, 1):
-	seq_in = raw_text[i:i + seq_length]
-	seq_out = raw_text[i + seq_length]
+for i in range(0, n_words - seq_length, 1):
+	seq_in = cfgc_data[i:i + seq_length]
+	seq_out = cfgc_data[i + seq_length]
 	dataX.append([word_to_int[w] for w in seq_in])
 	dataY.append(word_to_int[seq_out])
 n_patterns = len(dataX)
